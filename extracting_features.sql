@@ -9,25 +9,31 @@ DROP TABLE IF EXISTS output;
 
 #Batting Stats -Taking the sum of data from both The Batting and BattingPost Relational Instances
 CREATE TABLE Bat_Raw AS SELECT playerID, yearID, G, R, H, 2B, 3B, HR , SO from Batting UNION ALL SELECT  playerID, yearID, G, R, H, 2B, 3B, HR , SO from BattingPost;
-CREATE TABLE BatStats AS SELECT playerID, count(distinct yearID) as Years_Batted , sum(G) as totGB, sum(R) as totRB, sum(H) as totHB, sum(2B) as tot2B, sum(3B) as tot3B, sum(HR) as totHRB, sum(SO) as totSOB 
+CREATE TABLE BatStats AS 
+SELECT playerID, count(distinct yearID) as Years_Batted , sum(G) as totGB, sum(R) as totRB, sum(H) as totHB, sum(2B) as tot2B, sum(3B) as tot3B, 
+sum(HR) as totHRB, sum(SO) as totSOB 
 FROM Bat_Raw GROUP BY playerID;
 
 #Pitching Stats - Taking the sum of data from both The Pitching and PitchingPost Relational Instances
-CREATE TABLE Pitch_Raw AS SELECT playerID, yearID, G, W, L, IPOuts, H , R, ER , BB , SO , HR from Pitching UNION ALL SELECT  playerID, yearID, G, W, L, IPOuts, H , R, ER , BB , SO , HR from PitchingPost;
+CREATE TABLE Pitch_Raw AS SELECT playerID, yearID, G, W, L, IPOuts, H , R, ER , BB , SO , HR from Pitching UNION ALL SELECT  playerID, yearID, G, W, L, IPOuts, H , R, ER , 
+BB , SO , HR from PitchingPost;
 CREATE TABLE PitchStats AS 
 SELECT playerID, count(distinct yearID) as Years_Pitched , sum(G) as totGP, sum(W) as totW, sum(L) as totL, sum(IPOuts) as totIPOuts, 
 sum(H) as totHP, sum(R) as totRP, sum(ER) as totER, sum(BB) as totBB, sum(SO) as totSOP, sum(HR) as totHRP 
 FROM Pitch_Raw GROUP BY playerID;
 
 #Fielding Stats - Taking the sum of data from both The Fielding and FieldingPost Relational Instances
-CREATE TABLE Field_Raw AS SELECT playerID, yearID, G, A, PO, E, DP, PB , CS, InnOuts, SB from Fielding UNION ALL SELECT  playerID, yearID, G, A, PO, E, DP, PB , CS, InnOuts, SB from FieldingPost;
-CREATE TABLE FieldStats AS SELECT playerID, count(distinct yearID) as Years_Fielded , sum(G) as totGF, sum(A) as totA, sum(PO) as totPO, sum(E) as totE, sum(DP) as totDP, sum(PB) as totPB, 
+CREATE TABLE Field_Raw AS SELECT playerID, yearID, G, A, PO, E, DP, PB , CS, InnOuts, SB from Fielding UNION ALL SELECT  playerID, yearID, G, A, PO, E, DP, PB , CS, 
+InnOuts, SB from FieldingPost;
+CREATE TABLE FieldStats AS SELECT playerID, count(distinct yearID) as Years_Fielded , sum(G) as totGF, sum(A) as totA, sum(PO) as totPO, sum(E) as totE, sum(DP) 
+as totDP, sum(PB) as totPB, 
 sum(CS) as totCS, sum(InnOuts) as totInnOuts, sum(SB) as totSB FROM Field_Raw GROUP BY playerID;
 
 #HOF data - all that were nominated (inducted = Y or N) or elected (inducted = Y)
 CREATE TABLE HOF AS SELECT playerID, inducted from HallOfFame where (category = 'Player' and inducted = 'Y');
 #add the rest of the nominated who were not inducted
-INSERT INTO HOF (SELECT DISTINCT playerID, inducted from HallOfFame where (category = 'Player' AND playerID NOT IN (SELECT playerID from HallOfFame where (category = 'Player' and inducted = 'Y'))));
+INSERT INTO HOF (SELECT DISTINCT playerID, inducted from HallOfFame where (category = 'Player' AND playerID NOT IN (SELECT playerID from HallOfFame 
+where (category = 'Player' and inducted = 'Y'))));
 
 -- Table for Task 1
 CREATE TABLE taska_out AS SELECT m.playerID, 
