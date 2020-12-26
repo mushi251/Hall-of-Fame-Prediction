@@ -206,8 +206,8 @@ UPDATE taskb_out
 set deathYear= 0 where deathYear is null;
 
 -- Extracting csv files for Task 1 and Task 2 respectively. Had to extract the csv code through virtual machine because of file priledge problems
--- For Task A: mysql -B -h manta.uwaterloo.ca -u user_mm4siddi -p ece356db_mm4siddi -e "select * from taska_out" | sed 's/\t/,/g' > task1_extracted.csv
--- For Task A: mysql -B -h manta.uwaterloo.ca -u user_mm4siddi -p ece356db_mm4siddi -e "select * from taskb_out" | sed 's/\t/,/g' > task2_extracted.csv
+-- For Task 1: mysql -B -h manta.uwaterloo.ca -u user_mm4siddi -p ece356db_mm4siddi -e "select * from taska_out" | sed 's/\t/,/g' > task1_extracted.csv
+-- For Task 2: mysql -B -h manta.uwaterloo.ca -u user_mm4siddi -p ece356db_mm4siddi -e "select * from taskb_out" | sed 's/\t/,/g' > task2_extracted.csv
 
 /*
 -- If no issues would be made, try this code to extract the files
