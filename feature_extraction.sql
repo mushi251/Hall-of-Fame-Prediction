@@ -1,3 +1,4 @@
+-- Dropping these tables if already present in database
 DROP TABLE IF EXISTS Bat_Raw;
 DROP TABLE IF EXISTS BatStats;
 DROP TABLE IF EXISTS Pitch_Raw;
