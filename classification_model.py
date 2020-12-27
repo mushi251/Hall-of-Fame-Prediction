@@ -7,7 +7,8 @@ from sklearn.metrics import classification_report, confusion_matrix , accuracy_s
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV, train_test_split
 
-dataset = pd.read_csv('C:/Users/mushi/Downloads/lahman/deliverables/taska_extracted.csv') #change it to your own directory
+# Importing the csv file (make sure to change to your own dir)
+dataset = pd.read_csv('C:/Users/mushi/Downloads/lahman/deliverables/taska_extracted.csv')
 
 # Divide data into attributes and labels 
 A = dataset.drop(['inducted','playerID'], axis=1)
