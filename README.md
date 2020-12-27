@@ -1,4 +1,4 @@
-# Hall-of-Fame-Predictor
+# Hall-of-Fame-Classifer
 Analyzes the Lahman dataset to create Decision Tree models to predict the values of classes relating to nomination and induction of players into the Baseball Hall of Fame.
 
 Two classifiers are created:
